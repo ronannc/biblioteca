@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\Book;
 use App\Repositories\Contracts\BookRepository;
-use Illuminate\Support\Arr;
 
 class BookService
 {
@@ -31,9 +30,12 @@ class BookService
     private function groupSummaries($summaries)
     {
         foreach ($summaries as $key => $summary){
-            if($summary['indice_pai_id']){
-                $summaries[$summaries[$key]['indice_pai_id']]['subindices'][] = $summaries[$key];
-                unset($summaries[$key]);
+            if ( !isset( $summaries[ $key ][ 'subindices' ] ) ) {
+                $summaries[ $key ][ 'subindices' ] = [];
+            }
+            if ( $summary[ 'indice_pai_id' ] ) {
+                $summaries[ $summaries[ $key ][ 'indice_pai_id' ] ][ 'subindices' ][] = $summaries[ $key ];
+                unset( $summaries[ $key ] );
             }
         }
         return collect($summaries)->sortBy('id')->toArray();
@@ -46,10 +48,10 @@ class BookService
      *
      * @return \App\Models\Book|array
      */
-    public function store( $data )
+    public function store( $data, $user )
     {
         /** @var Book $book */
-        $book = Book::create( [ 'titulo' => $data[ 'titulo' ] ] );
+        $book = Book::create( [ 'titulo' => $data[ 'titulo' ], 'usuario_publicador_id' => $user->id ] );
         $this->saveSummary( $book, $data[ 'indices' ] );
         
         return $book;

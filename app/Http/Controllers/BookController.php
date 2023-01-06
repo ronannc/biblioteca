@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBookRequest;
-use App\Models\Book;
 use App\Services\BookService;
 use Illuminate\Http\Request;
 
@@ -36,7 +35,7 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
-        $book = $this->service->store($request->all());
+        $book = $this->service->store( $request->all(), $request->user() );
         
         return response(['message' => 'Livro cadastrado com sucesso !'], 201);
     }

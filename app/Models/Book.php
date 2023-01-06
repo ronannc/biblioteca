@@ -17,9 +17,6 @@ class Book extends Model
         'usuario_publicador_id',
         'titulo'
     ];
-    protected $attributes = [
-        'usuario_publicador_id' => 2
-    ];
     
     /**
      * Retorna o usuario criador do livro
