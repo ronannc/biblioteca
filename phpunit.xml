@@ -6,7 +6,7 @@
 >
     <testsuites>
         <testsuite name="feature-user">
-            <directory suffix="Test.php">./tests/feature/user</directory>
+            <directory suffix=".php">./tests/Feature/User</directory>
         </testsuite>
         <testsuite name="Unit">
             <directory suffix="Test.php">./tests/Unit</directory>
@@ -21,14 +21,6 @@
         </include>
     </coverage>
     <php>
-        <env name="APP_ENV" value="testing"/>
-        <env name="BCRYPT_ROUNDS" value="4"/>
-        <env name="CACHE_DRIVER" value="array"/>
-        <!-- <env name="DB_CONNECTION" value="sqlite"/> -->
-        <!-- <env name="DB_DATABASE" value=":memory:"/> -->
-        <env name="MAIL_MAILER" value="array"/>
-        <env name="QUEUE_CONNECTION" value="sync"/>
-        <env name="SESSION_DRIVER" value="array"/>
-        <env name="TELESCOPE_ENABLED" value="false"/>
+        <env name="DB_DATABASE" value="biblioteca"/>
     </php>
 </phpunit>
